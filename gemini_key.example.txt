@@ -1,0 +1,16 @@
+# ==============================================================================
+# Google Gemini API Key Pool Configuration
+# ==============================================================================
+# 1. Get free API key(s) from Google AI Studio: https://aistudio.google.com/app/apikey
+# 2. Copy or rename this file to 'gemini_key.txt'
+# 3. Paste your Gemini API key(s) below, one key per line.
+# 
+# Multi-Key Rotation & Pooling:
+# - You can add multiple keys from different Google accounts.
+# - The automation engine pools all keys, round-robins requests across them,
+#   and instantly switches keys if any account hits a rate limit or daily quota.
+# ==============================================================================
+
+# Replace with your actual Gemini API key(s):
+AIzaSyExampleKeyFromAccount1...
+AIzaSyExampleKeyFromAccount2...
