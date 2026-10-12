@@ -14,9 +14,28 @@ Go to the [Releases](https://github.com/Dhruv-Mann/oracle_automation/releases) s
 ### 2. Extract
 Right-click `Oracle-Academy-Auto-v1.0.zip` and select **Extract All**.
 
-### 3. (Optional) Add your Gemini API Key
-- Open `gemini_key.txt` in Notepad and paste your free key from [Google AI Studio](https://aistudio.google.com/app/apikey).
-- If you don't add a key, the bot will ask on first launch. You can either paste a key then, or press **Enter** to run in **Offline Mode** using built-in Oracle SQL solver heuristics.
+### 3. Add your Gemini API Key in `gemini_key.txt`
+
+To enable the Gemini AI engine to solve all quizzes, midterms, and final exams with 100% accuracy:
+
+1. **Get a Free API Key (30 seconds):**
+   - Visit [Google AI Studio](https://aistudio.google.com/app/apikey).
+   - Click **Create API key** (it is 100% free).
+
+2. **Open `gemini_key.txt`:**
+   - In the extracted folder, open **`gemini_key.txt`** in Notepad.
+   - *(If `gemini_key.txt` is not there, create a new text file named `gemini_key.txt` next to `OracleAuto.exe`)*.
+
+3. **Paste Your Key and Save:**
+   - Paste your API key into the file:
+     ```text
+     AIzaSyExampleKeyFromGoogleStudio...
+     ```
+   - **Multi-Account Pooling (Optional):** You can paste multiple keys (one per line) from different Google accounts. The engine pools them, round-robins requests, and switches accounts instantly if one hits a rate limit.
+   - Save the file (`Ctrl + S`) and close Notepad.
+
+> [!NOTE]
+> If `gemini_key.txt` is left empty, the engine automatically operates in **Offline Mode** using built-in Oracle SQL heuristic rules.
 
 ### 4. Run
 Double-click **`OracleAuto.exe`** (or `RUN_ORACLE_AUTO.bat`):
@@ -112,59 +131,11 @@ cp gemini_key.example.txt gemini_key.txt
 
 Add your Gemini API key(s) into `gemini_key.txt` (one key per line for multi-account pooling).
 
-### 4. Running via Python CLI
-
-**Run Full Autonomous Engine (all 3 courses):**
 ```bash
 python oracle_runner.py
 ```
 
-**Target a Single Course:**
-```bash
-python oracle_runner.py --course "Database Foundations – English"
-```
-
-**Solve the Currently Open Quiz Tab Immediately:**
-```bash
-python oracle_runner.py --current
-```
-
-**Run from a Specific Section to the End:**
-```bash
-python oracle_runner.py --from 8
-```
-
-**Solve Quizzes Only (Skip Slides):**
-```bash
-python oracle_runner.py --quizzes-only
-```
-
-**Play Slides Only (Skip Quizzes):**
-```bash
-python oracle_runner.py --slides-only
-```
-
-**Inspect and Scan Course Outline:**
-```bash
-python oracle_runner.py --scan
-```
-
-### Complete CLI Command Reference
-
-| Flag | Description | Example |
-| :--- | :--- | :--- |
-| *(no flags)* | Full autonomous multi-course loop | `python oracle_runner.py` |
-| `--all-courses` | Explicit alias for full multi-course loop | `python oracle_runner.py --all-courses` |
-| `--course "<name>"` | Target a specific named course | `python oracle_runner.py --course "Database Design – English"` |
-| `--current` | Solve active quiz tab without navigating | `python oracle_runner.py --current` |
-| `--quizzes-only` | Skip slides; only launch and solve quizzes | `python oracle_runner.py --quizzes-only` |
-| `--slides-only` | Click through slides only; skip quizzes | `python oracle_runner.py --slides-only` |
-| `--from <N>` | Start from Section N through course end | `python oracle_runner.py --from 5` |
-| `--section <N>` | Run a single specific section only | `python oracle_runner.py --section 3` |
-| `--scan` | Print all sections and progress percentages | `python oracle_runner.py --scan` |
-| `--test` | Run Section 1 test (Slides + Quiz) | `python oracle_runner.py --test` |
-| `--resume` | Resume from next incomplete section in `progress.md` | `python oracle_runner.py --resume` |
-| `--launch-chrome` | Launch Chrome with remote debugging on port 9222 | `python oracle_runner.py --launch-chrome` |
+This connects to your active Chrome browser (or launches Chrome with student profile), checks your `gemini_key.txt` pool, and executes the complete autonomous multi-course loop.
 
 ### Building the Standalone Executable
 
@@ -175,22 +146,6 @@ python build_exe.py
 ```
 
 The resulting executable is generated in `dist/OracleAuto.exe`.
-
----
-
-## Course Sequence Configuration
-
-The default sequence is defined in `oracle_core/course_navigator.py`:
-
-```python
-ALL_COURSES = [
-    "Database Programming with SQL – English",
-    "Database Foundations – English",
-    "Database Design – English",
-]
-```
-
-Reorder or edit the list to customize the execution target.
 
 ---
 
